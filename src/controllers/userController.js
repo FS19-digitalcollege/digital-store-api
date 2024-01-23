@@ -73,7 +73,9 @@ async function login(data){
             });
 
             await DB.execute(`UPDATE ${table} SET token = '${token}' WHERE user_id = ${result[0].user_id};`);
-            return token;
+            return {
+                token
+            };
         }
 
         return {
