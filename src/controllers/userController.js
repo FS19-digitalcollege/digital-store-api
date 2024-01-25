@@ -47,6 +47,21 @@ async function create(data){
     }
 }
 
+async function destroy(id){
+    try {
+        await DB.execute(`DELETE FROM ${table} WHERE user_id = '${id}';`);
+        return {
+            type: 'success',
+            message: 'Usuário deletado com sucesso'
+        }
+    } catch (error) {
+        return {
+            type: 'error',
+            message: error.message
+        }
+    }
+}
+
 async function login(data){
     try {
         if(!data.user_email || data.user_email === ''){
@@ -92,5 +107,6 @@ async function login(data){
 module.exports = {
     listAll,
     create,
+    destroy,
     login
 }
