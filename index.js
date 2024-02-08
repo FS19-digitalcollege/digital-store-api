@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const brandRoutes = require('./src/routes/brandRoutes');
 const userRoutes = require('./src/routes/userRoutes');
+const visitanteRoutes = require('./src/routes/visitanteRoutes');
 
 const app = express();
 const port = 8000;
@@ -20,6 +21,7 @@ app.get('/docs', (req, res) => {
 });
 
 app.use('/users', userRoutes);
+app.use('/visitantes', visitanteRoutes);
 app.use((req, res, next) => {
     if(!req.headers.authorization){
         return res.send('Token é necessário');

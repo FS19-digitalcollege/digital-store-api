@@ -1,4 +1,5 @@
 const mysql = require('mysql2/promise');
+const { Pool } = require('pg');
 
 async function execute(sql){
     const connection = await mysql.createConnection({
@@ -14,6 +15,16 @@ async function execute(sql){
     return result;
 }
 
+const connectionPG = new Pool({
+    connectionString: "postgres://museu_user:avYgsLJn5ndx51AxNK1p647XXLuAulhE@dpg-cn1q28ud3nmc73bpmc0g-a.oregon-postgres.render.com/museu_db",
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+const executePG = async (sql) => await connectionPG.query(sql);
+
 module.exports = {
-    execute
+    execute,
+    executePG
 }
